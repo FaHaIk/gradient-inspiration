@@ -1,0 +1,95 @@
+<template>
+  
+    <div class="gradient" :style="{ background: linearGradient }">
+      <span class="nameTxt">{{ name }}</span>
+    </div>
+    <div class="colorOne" :style="{ 'background-color': colorOne }"></div>
+    <div class="colorTwo" :style="{ 'background-color': colorTwo }"></div>
+    <div class="colorThree" :style="{ 'background-color': colorThree }"></div>
+  
+</template>
+
+<script lang="ts">
+import { ref, defineComponent } from "vue";
+
+
+export default defineComponent({
+  name: "Gradient",
+  components: {},
+  props: {
+    colorOne: {
+      type: String,
+      required: true,
+    },
+    colorTwo: {
+      type: String,
+      required: true,
+    },
+    colorThree: {
+      type: String,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const count = ref(0);
+    const linearGradient = ref(
+      props.colorThree == "#ECECEC"
+        ? "linear-gradient(to right, " +
+            props.colorOne +
+            ", " +
+            props.colorTwo +
+            ")"
+        : "linear-gradient(to right, " +
+            props.colorOne +
+            ", " +
+            props.colorTwo +
+            ", " +
+            props.colorThree +
+            ")"
+    );
+    function increase() {
+      count.value++;
+    }
+
+    return {
+      count,
+      increase,
+      linearGradient,
+    };
+  },
+});
+</script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Roboto:wght@500&display=swap');
+
+
+.gradient {
+  width: 240px;
+  height: 200px;
+  text-align: center;
+}
+.colorOne {
+  width: 80px;
+  height: 40px;
+}
+.colorTwo {
+  width: 80px;
+  height: 40px;
+}
+.colorThree {
+  width: 80px;
+  height: 40px;
+}
+.nameTxt {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 200px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+</style>
